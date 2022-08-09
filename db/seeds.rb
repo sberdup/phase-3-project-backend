@@ -1,13 +1,12 @@
-require 'open-uri'
-require 'net-http'
-require 'json
-'
+# require 'open-uri'
+# require 'net-http'
+# require 'json'
+
 puts "🌱 Seeding spices..."
 
-uri = URI.parse('https://botw-compendium.herokuapp.com/api/v2/categories/creatures')
+uri = URI.parse('https://botw-compendium.herokuapp.com/api/v2/all')
 response = Net::HTTP.get_response(uri)
-creatures = JSON.parse(response.body)
+hc_hash = JSON.parse(response.body)
 
-p creatures
 
 puts "✅ Done seeding!"
