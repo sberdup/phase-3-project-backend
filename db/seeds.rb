@@ -37,24 +37,83 @@ hc_treasure.each{|entry| locations << entry['common_locations']}
 locations = locations.flatten.uniq.filter{|string| string != nil}
 locations.each{|location| Location.create(name:location)}
 
-# Helper function seeding entity_locations 
+# Helper function creating entity_locations 
 def entity_map(db_entity, entity_data)
+    return if entity_data['common_locations'] == nil
     entity_data['common_locations'].each do |location|
         db_location = Location.find_by(name:location)
         EntityLocation.create(entity_id:db_entity.id, location_id:db_location.id)
     end
 end
 
-hc_creatures_food.each do |creature|
+# Creating entities
+hc_creatures_food.each do |entity|
     new_ent = Entity.create(
         category_id:1,
-        cooking_effect:creature['cooking_effect'],
-        description:creature['description'],
-        hearts_recovered:creature['hearts_recovered'],
-        image:creature['image'],
-        name:creature['name'] 
+        cooking_effect:entity['cooking_effect'],
+        description:entity['description'],
+        hearts_recovered:entity['hearts_recovered'],
+        image:entity['image'],
+        name:entity['name'],
+        logged:false 
     )
-    entity_map(new_ent, creature)
+    entity_map(new_ent, entity)
 end
-
+hc_creatures_non_food.each do |entity|
+    new_ent = Entity.create(
+        category_id:2,
+        drops:entity['drops'] == nil ? 'none' : entity['drops'].join(', '),
+        description:entity['description'],
+        image:entity['image'],
+        name:entity['name'], 
+        logged:false 
+    )
+    entity_map(new_ent, entity)
+end
+hc_monsters.each do |entity|
+    new_ent = Entity.create(
+        category_id:3,
+        drops:entity['drops'] == nil ? 'none' : entity['drops'].join(', '),
+        description:entity['description'],
+        image:entity['image'],
+        name:entity['name'],
+        logged:false 
+    )
+    entity_map(new_ent, entity)
+end
+hc_equipment.each do |entity|
+    new_ent = Entity.create(
+        category_id:4,
+        attack:entity['attack'],
+        defense:entity['defense'],
+        description:entity['description'],
+        image:entity['image'],
+        name:entity['name'],
+        logged:false 
+    )
+    entity_map(new_ent, entity)
+end
+hc_materials.each do |entity|
+    new_ent = Entity.create(
+        category_id:5,
+        cooking_effect:entity['cooking_effect'],
+        hearts_recovered:entity['hearts_recovered'],
+        description:entity['description'],
+        image:entity['image'],
+        name:entity['name'],
+        logged:false 
+    )
+    entity_map(new_ent, entity)
+end
+hc_treasure.each do |entity|
+    new_ent = Entity.create(
+        category_id:6,
+        drops:entity['drops'] == nil ? 'none' : entity['drops'].join(', '),
+        description:entity['description'],
+        image:entity['image'],
+        name:entity['name'],
+        logged:false 
+    )
+    entity_map(new_ent, entity)
+end
 puts "✅ Done seeding!"
