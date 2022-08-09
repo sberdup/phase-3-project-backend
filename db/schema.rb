@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2022_08_09_033219) do
     t.string "image"
     t.string "name"
     t.string "cooking_effect"
+    t.integer "hearts_recovered"
     t.integer "attack"
     t.integer "defense"
     t.string "drops"
@@ -29,8 +30,8 @@ ActiveRecord::Schema.define(version: 2022_08_09_033219) do
   end
 
   create_table "entity_locations", force: :cascade do |t|
-    t.integer "entity_key"
-    t.integer "location_key"
+    t.integer "entity_id"
+    t.integer "location_id"
   end
 
   create_table "locations", force: :cascade do |t|

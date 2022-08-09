@@ -6,6 +6,7 @@ class CreateEntities < ActiveRecord::Migration[6.1]
       t.string :image
       t.string :name
       t.string :cooking_effect
+      t.integer :hearts_recovered
       t.integer :attack
       t.integer :defense
       t.string :drops

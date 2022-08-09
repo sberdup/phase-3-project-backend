@@ -51,6 +51,7 @@ group :test do
   gem "rspec-json_expectations", "~> 2.2"
 end
 
+# Need these to get initial seed data
 gem 'open-uri'
 gem 'net-http'
 gem 'json'
