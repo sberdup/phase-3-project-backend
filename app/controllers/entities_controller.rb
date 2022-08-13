@@ -26,6 +26,7 @@ class EntitiesController < ApplicationController
     delete '/entry/:id' do
         entity = Entity.find(params[:id].to_i)
         entity.destroy
+        'delete success'.to_json
     end 
 
     get '/entry/:id/locations' do

@@ -2,7 +2,7 @@ class CategoriesController < ApplicationController
 
     get '/category/:category' do
         #all entries belonging to selected category
-        if params[:category] == 'creature'
+        if params[:category] == 'all_creatures'
             food = Category.find(1).entities
             non_food = Category.find(2).entities
             return (food + non_food).to_json
