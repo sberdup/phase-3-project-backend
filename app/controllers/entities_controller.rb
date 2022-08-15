@@ -12,7 +12,7 @@ class EntitiesController < ApplicationController
 
     get '/entry/:id' do
         #gets specific entry
-        Entity.find(params[:id].to_i).to_json
+        Entity.find(params[:id].to_i).to_json(include: :locations)
     end
 
     patch '/entry/:id' do
